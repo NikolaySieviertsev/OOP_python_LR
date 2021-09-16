@@ -9,36 +9,18 @@ The next parameter contains 'weights' - list of weights of each gold bar.
 Output : Maximum weight of gold that fits into a knapsack with capacity of W.
 """
 
-bagpack_capacity = int(input("Enter the knapsack capacity: "))
-num_of_bars = int(input("Enter the number of golden bars: "))
+def knapsack(weight: int, capacity: list):
+
+    array = [1] + [0]*weight
+    for index1 in range(len(capacity)):
+        for index2 in range(weight, capacity[index1] - 1, -1):
+            if array[index2 - capacity[index1]] == 1:
+                array[index2] = 1
+
+    index1 = weight
+    while array[index1] == 0:
+        index1 -= 1
+    print(index1)
 
 
-def knapsack(bagpack_capacity, num_of_bars):
-    max_weight = 0
-    list_of_bars_weight = []
-    list_max_weight = []
-    print("Enter the weight of each golder bar: ")
-    for index1 in range(1, num_of_bars + 1):
-        bar_weight = int(input())
-        list_of_bars_weight.append(bar_weight)
-
-    list_of_bars_weight.sort()
-    list_of_bars_weight.reverse()
-
-    for index2 in range(len(list_of_bars_weight)):
-        for index3 in range(index2, len(list_of_bars_weight)):
-            max_weight += list_of_bars_weight[index3]
-            if max_weight > bagpack_capacity:
-                max_weight = max_weight - list_of_bars_weight[index3]
-        list_max_weight.append(max_weight)
-        max_weight = 0
-
-    print("Max weight of gold that fits into a knapsack with capacity of", bagpack_capacity, "is", max(list_max_weight))
-    # print(list_of_bars_weight)
-    # print(list_max_weight)
-    # print(max(list_max_weight))
-
-    return bagpack_capacity, num_of_bars
-
-
-knapsack(bagpack_capacity, num_of_bars)
+knapsack(20, [10,7,7,2])
