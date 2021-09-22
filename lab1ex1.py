@@ -8,8 +8,17 @@ The script should be launched like this:
 
 import sys
 
-num_1, operation, num_2 = int(sys.argv[1]), sys.argv[2], int(sys.argv[3])
+try:
+    num_1, operation, num_2 = int(sys.argv[1]), sys.argv[2], int(sys.argv[3])
 
-operations = {'+': num_1 + num_2, '-': num_1 - num_2, '*': num_1 * num_2, '/': num_1 / num_2}
+    operations = {'+': num_1 + num_2, '-': num_1 - num_2, '*': num_1 * num_2, '/': num_1 / num_2}
 
-print(operations[operation])
+    print(operations[operation])
+except ZeroDivisionError:
+    print("You cannot divide by zero!")
+except KeyError:
+    print("Dictionary key is not found!")
+except IndexError:
+    print("Sequence index is out of range or string is empty!")
+except ValueError:
+    print("You entered wrong arguments!")

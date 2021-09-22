@@ -11,7 +11,7 @@ Output : Maximum weight of gold that fits into a knapsack with capacity of W.
 
 def knapsack(weight: int, capacity: list):
 
-    array = [1] + [0]*weight
+    array = [1] + [0] * weight
     for index1 in range(len(capacity)):
         for index2 in range(weight, capacity[index1] - 1, -1):
             if array[index2 - capacity[index1]] == 1:
@@ -23,4 +23,4 @@ def knapsack(weight: int, capacity: list):
     print(index1)
 
 
-knapsack(20, [10,7,7,2])
+knapsack(30, [10, 7, 7, 2, 12])
