@@ -9,43 +9,48 @@ than 0.0 and less than 20.0.
 class Rectangle(object):
 
     def __init__(self, length=1, width=1):
-        self.length = length
-        self.width = width
+        if isinstance(length, (int, float)) and isinstance(width, (int, float)):
+            if length > 0 and width > 0:
+                self._length = length
+                self._width = width
+            else:
+                raise ValueError("Values have to be > 0")
+        else:
+            raise TypeError("Values have to be integer or float")
 
-    def get_width(self):
-        return self.width
+    def __str__(self):
+        return f"Rectangle({self._length}, {self._width})"
+
+    @property
+    def width(self):
+        return self._width
 
     def set_width(self, value):
-        try:
-            self.width = value
-            float(value)
-            return True
-        except ValueError:
-            return False
+        if not (isinstance(value, float) and 0.0 < value < 20.0):
+            raise Exception("Error! Wrong type and value of width!")
+        self._width = value
 
-    def get_length(self):
-        return self.length
+    @property
+    def length(self):
+        return self._length
 
     def set_length(self, value):
-        try:
-            self.length = value
-            float(value)
-            return True
-        except ValueError:
-            return False
+        if not (isinstance(value, float) and 0.0 < value < 20.0):
+            raise Exception("Error! Wrong type and value of length!")
+        self._length = value
 
     def perimeter(self):
         # calculate the perimeter
-        return 2 * (self.width + self.length)
+        return 2 * (self._width + self._length)
 
     def area(self):
         # calculate the area
-        return self.width * self.length
+        return self._width * self._length
 
 
 figure = Rectangle()
-figure.set_width(4)
-figure.set_length(5)
+figure.set_width(4.0)
+figure.set_length(5.0)
 print("Length of rectangle : ", figure.length)
 print("Width of rectangle : ", figure.width)
 print("Area of rectangle : ", figure.area())
