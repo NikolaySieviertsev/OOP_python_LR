@@ -51,6 +51,7 @@ class Rectangle(object):
 figure = Rectangle()
 figure.set_width(4.0)
 figure.set_length(5.0)
+#print(figure.__str__())
 print("Length of rectangle : ", figure.length)
 print("Width of rectangle : ", figure.width)
 print("Area of rectangle : ", figure.area())
