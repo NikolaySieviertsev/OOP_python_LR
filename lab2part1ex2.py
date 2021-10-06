@@ -14,13 +14,13 @@ from math import gcd
 
 class Rational:
     def __init__(self, numerator=4, denominator=5):
-        if not denominator:
-            raise ZeroDivisionError("Division by Zero")
         if not isinstance(numerator, int) or not isinstance(denominator, int):
-            raise TypeError("Value have to be int")
-        tmp = gcd(numerator, denominator)
-        self.__denominator = denominator // tmp
-        self.__numerator = numerator // tmp
+            raise TypeError("Value have to be integer type!")
+        if not denominator:
+            raise ZeroDivisionError("Division by Zero!")
+        temp = gcd(numerator, denominator)
+        self.__denominator = denominator // temp
+        self.__numerator = numerator // temp
 
     def rat(self):
         return f'{self.__numerator} / {self.__denominator}'
@@ -30,8 +30,8 @@ class Rational:
 
 
 try:
-    r = Rational()
-    print(r.rat())
-    print(r.fl())
+    number = Rational()
+    print(number.rat())
+    print(number.fl())
 except AttributeError:
     print("Wrong arguments!")
