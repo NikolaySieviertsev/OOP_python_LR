@@ -59,10 +59,13 @@ try:
     number1 = Rational(5, 10)
     number2 = Rational(4, 5)
     number3 = number1 + number2
+    print("First fraction:")
     print(number1.rat())
     print(number1.fl())
+    print("Second fraction:")
     print(number2.rat())
     print(number2.fl())
+    print("Result:")
     print(number3.rat())
     print(number3.fl())
 except AttributeError:
