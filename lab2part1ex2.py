@@ -13,7 +13,7 @@ from math import gcd
 
 
 class Rational:
-    def __init__(self, numerator=4, denominator=5):
+    def __init__(self, numerator=1, denominator=1):
         if not isinstance(numerator, int) or not isinstance(denominator, int):
             raise TypeError("Value have to be integer type!")
         if not denominator:
@@ -28,10 +28,42 @@ class Rational:
     def fl(self):
         return self.__numerator / self.__denominator
 
+    def __add__(self, other):
+
+        self_denominator = self.__denominator
+
+        other_denominator = other.__denominator
+
+        return Rational(self.__numerator * other_denominator + other.__numerator * self_denominator,
+                        self.__denominator * other_denominator)
+
+    def __sub__(self, other):
+
+        self_denominator = self.__denominator
+
+        other_denominator = other.__denominator
+
+        return Rational(self.__numerator * other_denominator - other.__numerator * self_denominator,
+                        self.__denominator * other_denominator)
+
+    def __mul__(self, other):
+
+        return Rational(self.__numerator * other.__numerator, self.__denominator * other.__denominator)
+
+    def __truediv__(self, other):
+
+        return Rational(self.__numerator * other.__denominator, self.__denominator * other.__numerator)
+
 
 try:
-    number = Rational()
-    print(number.rat())
-    print(number.fl())
+    number1 = Rational(5, 10)
+    number2 = Rational(4, 5)
+    number3 = number1 + number2
+    print(number1.rat())
+    print(number1.fl())
+    print(number2.rat())
+    print(number2.fl())
+    print(number3.rat())
+    print(number3.fl())
 except AttributeError:
     print("Wrong arguments!")
