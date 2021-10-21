@@ -12,11 +12,13 @@ Implement a method for calculating the total order value.
 class Product(object):
 
     def __init__(self, price, description, dimensions):
+        if not isinstance(price, (int, float)) and isinstance(dimensions, (int, float)):
+            raise TypeError("Incorrect type of price or/and dimensions!")
+        if price < 0 or dimensions <= 0:
+            raise ValueError('Price has to be a positive value and/or dimensions cannot have negative or zero value!')
         self.price = price
         self.description = description
         self.dimensions = dimensions
-        if not isinstance(price, (int, float)) and isinstance(dimensions, (int, float)):
-            raise TypeError("Incorrect type of price or/and dimensions!")
 
     def __str__(self):
         return f"Product: price - {self.price}, description - {self.description}, dimensions - {self.dimensions})"
@@ -37,12 +39,11 @@ class Customer(object):
 class Order(object):
 
     def __init__(self, customer, **kwargs):
-        for element in kwargs:
-            if not isinstance(kwargs[element], Product):
-                raise TypeError("Selected product have to belong to 'Product' type!")
-        self.__selected_products = kwargs
+        if not all(kwargs):
+            raise TypeError("Selected product have to belong to 'Product' type and cannot be empty!")
         if not (isinstance(customer, Customer)):
             raise TypeError("New customer have to belong to 'Customer' type!")
+        self.__selected_products = kwargs
         self.__new_customer = customer
 
     def get_total_price(self):
@@ -50,7 +51,6 @@ class Order(object):
         total = 0
         for element in self.__selected_products:
             total += self.__selected_products[element].price * self.__selected_products[element].dimensions
-
         return total
 
     def __str__(self):
@@ -69,5 +69,5 @@ product_4 = Product(1, "keyboards", 48)
 order = Order(fresh_customer, product1=product_1, product2=product_2, product3=product_3, product4=product_4)
 print(order)
 
-# print(product_1.__str__())
-# print(fresh_customer.__str__())
+# print(product_1)
+# print(fresh_customer)

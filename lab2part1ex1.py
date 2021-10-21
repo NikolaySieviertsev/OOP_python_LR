@@ -9,14 +9,12 @@ than 0.0 and less than 20.0.
 class Rectangle(object):
 
     def __init__(self, length=1, width=1):
-        if isinstance(length, (int, float)) and isinstance(width, (int, float)):
-            if length > 0 and width > 0:
-                self._length = length
-                self._width = width
-            else:
-                raise ValueError("Values have to be > 0")
-        else:
+        if not isinstance(length, (int, float)) and isinstance(width, (int, float)):
             raise TypeError("Values have to be integer or float")
+        if not (length > 0 and width > 0):
+            raise ValueError("Values have to be > 0")
+        self._length = length
+        self._width = width
 
     def __str__(self):
         return f"Rectangle({self._length}, {self._width})"
@@ -25,7 +23,8 @@ class Rectangle(object):
     def width(self):
         return self._width
 
-    def set_width(self, value):
+    @width.setter
+    def width(self, value):
         if not (isinstance(value, float) and 0.0 < value < 20.0):
             raise Exception("Error! Wrong type and value of width!")
         self._width = value
@@ -34,7 +33,8 @@ class Rectangle(object):
     def length(self):
         return self._length
 
-    def set_length(self, value):
+    @length.setter
+    def length(self, value):
         if not (isinstance(value, float) and 0.0 < value < 20.0):
             raise Exception("Error! Wrong type and value of length!")
         self._length = value
@@ -49,8 +49,8 @@ class Rectangle(object):
 
 
 figure = Rectangle()
-figure.set_width(4.0)
-figure.set_length(5.0)
+figure.width = 4.0
+figure.length = 5.0
 # print(figure.__str__())
 print("Length of rectangle : ", figure.length)
 print("Width of rectangle : ", figure.width)
