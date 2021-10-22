@@ -7,53 +7,54 @@ Determine the required attributes-data and attributes-methods in class for worki
 import re
 
 
-class TextProcessor(object):
+class TextProcessor:
     """ Class TextProcessor performs statistical processing of a text file - counting characters,
      words, sentences, special characters by using appropriate methods."""
 
     @staticmethod
-    def process_characters():
-        file = open('textFileForEx2Lab2.txt')
+    def process_characters(name):
+        file = open(name)
         text = file.read()
         file.close()
         return len(text)
 
     @staticmethod
-    def count_special_characters(symbol):
-        file = open('textFileForEx2Lab2.txt')
+    def count_special_characters(symbol, name):
+        file = open(name)
         text = file.read()
         file.close()
         return text.count(symbol)
 
     @staticmethod
-    def process_words():
-        file = open('textFileForEx2Lab2.txt')
+    def process_words(name):
+        file = open(name)
         text = file.read()
         file.close()
         return len(text.split())
 
     @staticmethod
-    def process_sentences():
-        file = open('textFileForEx2Lab2.txt')
+    def process_sentences(name):
+        file = open(name)
         text = file.read()
         file.close()
         result = re.split(r"[.?!\n]+", text)
         return len(list(filter(lambda x: x, result)))
 
     @staticmethod
-    def show_text():
-        file = open('textFileForEx2Lab2.txt')
+    def show_text(name):
+        file = open(name)
         text = file.read()
         file.close()
         return text
 
 
+file_name = 'textFileForEx2Lab2.txt'
 # print(TextProcessor.show_text())
-print("Number of all characters:", TextProcessor.process_characters())
-print("Number of ',' symbols:", TextProcessor.count_special_characters(','))
-print("Number of '.' symbols:", TextProcessor.count_special_characters('.'))
-print("Number of ':' symbols:", TextProcessor.count_special_characters(':'))
-print("Number of '?' symbols:", TextProcessor.count_special_characters('?'))
-print("Number of '!' symbols:", TextProcessor.count_special_characters('!'))
-print("Number of all words:", TextProcessor.process_words())
-print("Number of all sentences:", TextProcessor.process_sentences())
+print("Number of all characters:", TextProcessor.process_characters(file_name))
+print("Number of ',' symbols:", TextProcessor.count_special_characters(',', file_name))
+print("Number of '.' symbols:", TextProcessor.count_special_characters('.', file_name))
+print("Number of ':' symbols:", TextProcessor.count_special_characters(':', file_name))
+print("Number of '?' symbols:", TextProcessor.count_special_characters('?', file_name))
+print("Number of '!' symbols:", TextProcessor.count_special_characters('!', file_name))
+print("Number of all words:", TextProcessor.process_words(file_name))
+print("Number of all sentences:", TextProcessor.process_sentences(file_name))

@@ -19,13 +19,13 @@ class Node:
         self.price = price
 
     def final_price(self, current):
-        if current.left is None and current.right is None:
+        if not current.left and not current.right:
             return current.number * current.price
-        elif current.left is not None and current.right is not None:
+        elif current.left and current.right:
             return current.number * current.price + self.final_price(current.left) + self.final_price(current.right)
-        elif current.left is not None and current.right is None:
+        elif current.left and not current.right:
             return current.number * current.price + self.final_price(current.left)
-        elif current.right and current.left is None:
+        elif current.right and not current.left:
             return current.number * current.price + self.final_price(current.right)
 
 
@@ -42,21 +42,21 @@ class BinaryTree:
             raise TypeError("Number has incorrect type for inserting!")
         if not isinstance(price, int):
             raise TypeError("Price has incorrect type for inserting!")
-        if self.root is None:
+        if not self.root:
             self.root = Node(code, number, price)
         else:
             current = self.root
-            while 1:
+            while True:
                 if code < current.code:
-                    if current.left is None:
+                    if not current.left:
                         current.left = Node(code, number, price)
-                        break
+                        return current.left
                     else:
                         current = current.left
                 elif code > current.code:
-                    if current.right is None:
+                    if not current.right:
                         current.right = Node(code, number, price)
-                        break
+                        return current.right
                     else:
                         current = current.right
                 else:

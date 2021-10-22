@@ -7,8 +7,10 @@ to the standard output stream the five students with the highest average score.
 Assume that there can be no more than 20 students in a group, as well as students with the same name and surname.
 """
 
+MAX_AMOUNT_OF_STUDENTS = 20
 
-class Student(object):
+
+class Student:
     """ Class Student contains the student's name, surname, record book number and grades.
          Also it has getter and setter methods for appropriate attributes and a method to find average scores."""
 
@@ -26,7 +28,7 @@ class Student(object):
     def name(self, name):
         if not isinstance(name, str):
             raise TypeError('Surname has to be string type!')
-        if name == '':
+        if not name:
             raise ValueError('Name cannot be empty!')
         self.__name = name
 
@@ -38,7 +40,7 @@ class Student(object):
     def surname(self, surname):
         if not isinstance(surname, str):
             raise TypeError('Surname has to be string type!')
-        if surname == '':
+        if not surname:
             raise ValueError('Surname cannot be empty!')
         self.__surname = surname
 
@@ -63,18 +65,17 @@ class Student(object):
         if not all(grades):
             raise ValueError('Grades sequence cannot be empty!')
         self.__grades = grades
-        self.__average_score = round(sum(grades) / len(grades), 1)
 
     @property
     def average_score(self):
-        return self.__average_score
+        return round(sum(self.grades) / len(self.grades), 1)
 
     def __str__(self) -> str:
         return f'Name: {self.name}\nSurname: {self.surname}\nRecord book number: {str(self.record_book)}\n' \
                f'Grades: {self.grades}\nAverage: {self.average_score}\n\n'
 
 
-class Group(object):
+class Group:
     """" Class Group contains a sequence of instances of the class Student.
           Also it contains list of students and method to find students with the highest average score."""
 
@@ -89,7 +90,7 @@ class Group(object):
     def students(self, student_list):
         if not student_list:
             raise ValueError('Group cannot be empty!')
-        if len(student_list) > 20:
+        if len(student_list) > MAX_AMOUNT_OF_STUDENTS:
             raise ValueError('Group have to contain less than 20 students!')
         if isinstance(all(student_list), Student):
             raise TypeError('Students have to be "Student" type!')
@@ -112,10 +113,10 @@ class Group(object):
         return False
 
     def __str__(self):
-        string = ""
+        field = ""
         for index in self.students[:5]:
-            string += str(index) + "\n"
-        return f'{string}'
+            field += str(index) + "\n"
+        return f'{field}'
 
 
 instance1 = Student('Kolya', 'Severtsev', 1, 5, 1, 5, 2, 5, 5)

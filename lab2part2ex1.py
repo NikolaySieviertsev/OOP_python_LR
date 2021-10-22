@@ -9,7 +9,7 @@ Implement a method for calculating the total order value.
 """
 
 
-class Product(object):
+class Product:
 
     def __init__(self, price, description, dimensions):
         if not isinstance(price, (int, float)) and isinstance(dimensions, (int, float)):
@@ -24,7 +24,7 @@ class Product(object):
         return f"Product: price - {self.price}, description - {self.description}, dimensions - {self.dimensions})"
 
 
-class Customer(object):
+class Customer:
 
     def __init__(self, surname, name, patronymic, mobile_phone):
         self.surname = surname
@@ -36,7 +36,7 @@ class Customer(object):
         return f"Customer({self.surname}, {self.name}, {self.patronymic}, {self.mobile_phone})"
 
 
-class Order(object):
+class Order:
 
     def __init__(self, customer, **kwargs):
         if not all(kwargs):
