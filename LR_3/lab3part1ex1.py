@@ -20,8 +20,7 @@ import datetime
 class Ticket:
     id_generator = 0
 
-    def __init__(self, value=0):
-        self.__id = value
+    def __init__(self):
         with open("IT-event.json", 'r') as f:
             event = json.load(f)
         self.price = event['event']['price']
@@ -34,9 +33,10 @@ class Ticket:
     @id.setter
     def id(self, value):
         if not isinstance(value, int):
-            raise TypeError("ID must be int")
+            raise TypeError("ID have to be integer type!")
         if value > Ticket.id_generator:
-            raise ValueError("ID generation failure")
+            raise ValueError("ID generation failure!")
+        self.__id = value
 
     @property
     def price(self):
@@ -45,9 +45,9 @@ class Ticket:
     @price.setter
     def price(self, value):
         if not isinstance(value, (int, float)):
-            raise TypeError("Price must be numeric")
+            raise TypeError("Price have to be numeric type!")
         if value <= 0:
-            raise ValueError("Price must be larger than 0")
+            raise ValueError("Price have to be larger than 0!")
         self.__price = value
 
     def __str__(self):
@@ -91,11 +91,11 @@ class Event:
     def show_tickets(self):
         date_dif = (self.date - datetime.datetime.now()).days
         if date_dif < 0:
-            return f"Oops, you`re too late"
+            return f"Oh no, you`re too late!"
         with open("IT-event.json", 'r') as f:
             event = json.load(f)
         if not event['event']['number_of_tickets']:
-            return f"Ops, you`re too late"
+            return f"Oh no, you`re too late!"
         if date_dif > 60:
             return f"Ticket price: {self.advanced.price}$\nFor students: " \
                    f"{self.student.price}$\n{event['event']['number_of_tickets']}" \
@@ -140,8 +140,8 @@ class Event:
             data['event'][str(ticket.id)]['price'] = ticket.price
             data['event'][str(ticket.id)]['purchase_date'] = str(date)
         with open("data.json", 'w') as f:
-            json.dump(data, f)
-        return f"You successfully bought your ticket!\n" \
+            json.dump(data, f, indent=4)
+        return f"You successfully bought your ticket for {ticket.price}!\n" \
                f"Id:{ticket.id}\n\n"
 
     @staticmethod
@@ -158,31 +158,31 @@ class Event:
                f"Price: {price}\nPurchase date: {date}"
 
 
-# response = ""
-# id = ""
+response = ""
+id = ""
 occurrence = Event()
 print(occurrence.show_tickets())
 print(occurrence.date)
-response = input("Do you want to search or buy tickets? S/B\nq - to quit\n")
 while not response.upper() == "Q":
-    try:
-        if response.upper() == "S":
+    response = input("Do you want to search or buy tickets? S/B\nq - to quit\n")
+    if response.upper() == "S":
+        try:
             id = input("Enter id ")
             print(occurrence.search_ticket(id))
-        elif response.upper() == "B":
-            response = input("Are you a student? Y/N\n")
-            try:
-                if response.upper() == "Y":
-                    st = True
-                elif response.upper() == "N":
-                    st = False
-                else:
-                    raise TypeError("Incorrect data")
-                print(occurrence.buy_ticket(st))
-            except TypeError:
-                print("Something went wrong")
-        else:
-            raise TypeError("Incorrect data")
-        print(occurrence.show_tickets())
-    except TypeError:
-        print("Something went wrong")
+        except KeyError:
+            print("Wrong ticket name, restarting...\n")
+    elif response.upper() == "B":
+        response = input("Are you a student? Y/N\n")
+        try:
+            if response.upper() == "Y":
+                st = True
+            elif response.upper() == "N":
+                st = False
+            else:
+                raise TypeError("Incorrect data")
+            print(occurrence.buy_ticket(st))
+        except TypeError:
+            print("Something went wrong, try again")
+    else:
+        print("Oops, try again")
+    print(occurrence.show_tickets())
