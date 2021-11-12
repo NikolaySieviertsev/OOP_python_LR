@@ -16,6 +16,14 @@ All tickets must have the following properties:
 import json
 import datetime
 
+ADVANCE_DAYS_COUNTER = 60
+LATE_DAYS_COUNTER = 10
+NULL_DAYS_COUNTER = 0
+COEFFICIENT_FOR_ADVANCE_TICKET = 0.6
+COEFFICIENT_FOR_STUDENT_TICKET = 0.5
+COEFFICIENT_FOR_LATE_TICKET = 1.1
+LACK_OF_TICKETS = 0
+
 
 class Ticket:
     id_generator = 0
@@ -59,7 +67,7 @@ class AdvanceTicket(Ticket):
         super().__init__()
         with open("IT-event.json", 'r') as f:
             event = json.load(f)
-            self.price = event['event']['price'] * 0.6
+            self.price = event['event']['price'] * COEFFICIENT_FOR_ADVANCE_TICKET
 
 
 class LateTicket(Ticket):
@@ -67,7 +75,7 @@ class LateTicket(Ticket):
         super().__init__()
         with open("IT-event.json", 'r') as f:
             event = json.load(f)
-            self.price = event['event']['price'] * 1.1
+            self.price = event['event']['price'] * COEFFICIENT_FOR_LATE_TICKET
 
 
 class StudentTicket(Ticket):
@@ -75,7 +83,7 @@ class StudentTicket(Ticket):
         super().__init__()
         with open("IT-event.json", 'r') as f:
             event = json.load(f)
-            self.price = event['event']['price'] * 0.5
+            self.price = event['event']['price'] * COEFFICIENT_FOR_STUDENT_TICKET
 
 
 class Event:
@@ -90,17 +98,17 @@ class Event:
 
     def show_tickets(self):
         date_dif = (self.date - datetime.datetime.now()).days
-        if date_dif < 0:
+        if date_dif < NULL_DAYS_COUNTER:
             return f"Oh no, you`re too late!"
         with open("IT-event.json", 'r') as f:
             event = json.load(f)
         if not event['event']['number_of_tickets']:
             return f"Oh no, you`re too late!"
-        if date_dif > 60:
+        if date_dif > ADVANCE_DAYS_COUNTER:
             return f"Ticket price: {self.advanced.price}$\nFor students: " \
                    f"{self.student.price}$\n{event['event']['number_of_tickets']}" \
                    f" tickets left\n\n"
-        elif 0 <= date_dif < 10:
+        elif NULL_DAYS_COUNTER <= date_dif < LATE_DAYS_COUNTER:
             return f"Ticket price: {self.late.price}$\nFor students: " \
                    f"{self.student.price}$\n{event['event']['number_of_tickets']}" \
                    f" tickets left\n\n"
@@ -113,19 +121,19 @@ class Event:
         date = datetime.datetime.now()
         with open("IT-event.json", 'r') as f:
             event = json.load(f)
-        if event["event"]["number_of_tickets"] <= 0:
+        if event["event"]["number_of_tickets"] <= LACK_OF_TICKETS:
             raise ValueError("Tickets sold out!")
         date_dif = (self.date - datetime.datetime.now()).days
-        if date_dif < 0:
+        if date_dif < NULL_DAYS_COUNTER:
             raise TimeoutError("Time to buy tickets is up. Event ended.")
         event["event"]["number_of_tickets"] -= 1
         with open("IT-event.json", 'w') as f:
             json.dump(event, f)
         if is_student:
             ticket = self.student
-        elif date_dif > 60:
+        elif date_dif > ADVANCE_DAYS_COUNTER:
             ticket = self.advanced
-        elif 0 <= date_dif < 10:
+        elif NULL_DAYS_COUNTER <= date_dif < LATE_DAYS_COUNTER:
             ticket = self.late
         else:
             ticket = self.regular
