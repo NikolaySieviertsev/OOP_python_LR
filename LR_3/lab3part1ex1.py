@@ -187,10 +187,10 @@ while not response.upper() == "Q":
             elif response.upper() == "N":
                 st = False
             else:
-                raise TypeError("Incorrect data")
+                raise TypeError("Incorrect data!")
             print(occurrence.buy_ticket(st))
         except TypeError:
-            print("Something went wrong, try again")
+            print("Something went wrong, try again!")
     else:
-        print("Oops, try again")
+        print("Oops, try again!")
     print(occurrence.show_tickets())
