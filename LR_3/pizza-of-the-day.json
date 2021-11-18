@@ -1,0 +1,21 @@
+{"Monday":{
+    "ingredients":["Sauce", "Cheese", "Pineapple"],
+    "name": "Summer"},
+  "Tuesday":{
+    "ingredients":["Sauce", "Cheese", "Sausage"],
+    "name": "Hot Sausage"},
+  "Wednesday":{
+    "ingredients":["Sauce", "Tomato", "Olives"],
+    "name": "Vegan Edition"},
+  "Thursday":{
+    "ingredients":["Sauce", "Cheese", "Chicken", "Beef", "Tomato"],
+    "name": "Spicy Diablo"},
+  "Friday":{
+    "ingredients":["Sauce", "Cheese", "Mushrooms", "Corn"],
+    "name": "Forest Pleasure"},
+  "Saturday":{
+    "ingredients":["Sauce", "Cheese", "Tomato"],
+    "name":"Light Edition"},
+  "Sunday":{
+    "ingredients":["Sauce", "Cheese", "Chicken", "Beef", "Corn", "Olives"],
+    "name":"Super Tasty"}}
