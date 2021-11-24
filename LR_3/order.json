@@ -1,14 +1,11 @@
 {
     "ingredients": [
         "Sauce",
-        "Cheese",
-        "Chicken",
-        "Beef",
         "Tomato",
-        "Pineapple",
         "Olives",
-        "Extra Olives"
+        "Corn"
     ],
-    "name": "Spicy Diablo",
-    "date": "2021-11-18"
+    "name": "Vegan Edition",
+    "day": "Wednesday",
+    "date": "2021-11-24"
 }

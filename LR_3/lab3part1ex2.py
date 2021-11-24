@@ -11,6 +11,8 @@ from datetime import date
 from random import randint
 
 MENU_BORDER = 25
+PIZZA_FILE = "pizza-of-the-day.json"
+INGREDIENTS_FILE = "ingredients.json"
 
 
 class BaseRandomPizza:
@@ -18,12 +20,11 @@ class BaseRandomPizza:
          it has three methods to add or show ingredients and to form the customer's order."""
 
     def __init__(self):
-        day = randint(0, 6)
-        with open("pizza-of-the-day.json", "r") as f:
+        day = str(randint(0, 6))
+        with open(PIZZA_FILE, "r") as f:
             data = load(f)
-            self.day = list(data)[day]
-            self.ingredients = data[list(data)[day]]['ingredients']
-            print(self.ingredients)
+            self.ingredients = data[day]['ingredients']
+            self.day = day
 
     @property
     def day(self):
@@ -46,7 +47,7 @@ class BaseRandomPizza:
         self.__ingredients = ingredients
 
     def __str__(self):
-        with open("pizza-of-the-day.json", "r") as f:
+        with open(PIZZA_FILE, "r") as f:
             data = load(f)
             temp = '|  ' + str(data[self.day]['name']) + '\n'
         temp += '-' * MENU_BORDER + '\n'
@@ -55,7 +56,7 @@ class BaseRandomPizza:
         return temp
 
     def add_ingredients(self, ing):
-        with open("ingredients.json", "r") as f:
+        with open(INGREDIENTS_FILE, "r") as f:
             ingredients = load(f)
         if self.ingredients.count(ingredients[int(ing)]) > 0:
             self.ingredients.append("Extra " + ingredients[int(ing)])
@@ -64,7 +65,7 @@ class BaseRandomPizza:
 
     @staticmethod
     def show_ingredients():
-        with open("ingredients.json", "r") as f:
+        with open(INGREDIENTS_FILE, "r") as f:
             ingredients = load(f)
         temp = '|  Ingredients:\n' + '-' * MENU_BORDER + ' \n'
         for index in range(len(ingredients)):
@@ -72,7 +73,7 @@ class BaseRandomPizza:
         return temp
 
     def form_order(self):
-        with open("pizza-of-the-day.json", "r") as f:
+        with open(PIZZA_FILE, "r") as f:
             data = load(f)
             dumped = data[self.day]
             dumped['ingredients'] = self.ingredients
@@ -86,9 +87,10 @@ class PizzaOfTheDay(BaseRandomPizza):
 
     def __init__(self):
         super().__init__()
-        with open("pizza-of-the-day.json", "r") as f:
-            data = load(f)
-            self.day = list(data)[date.today().weekday()]
+        with open(PIZZA_FILE, "r") as f:
+            self.day = str(date.today().weekday())
+            # data = load(f)
+            # self.day = list(data)[date.today().weekday()]
 
 
 try:
