@@ -21,7 +21,7 @@ class Rational:
         Constructor for creating numerator and denominator of fractions.
         """
         if not (isinstance(numerator, int) or isinstance(denominator, int)):
-            raise TypeError('Incorrect type of numerator!')
+            raise TypeError('Incorrect type of numerator or denominator!')
         if denominator == 0:
             raise ZeroDivisionError
         greatest_common_divisor = gcd(numerator, denominator)
@@ -43,10 +43,6 @@ class Rational:
     @denominator.setter
     def denominator(self, num):
         self._denominator = num
-
-    def reducing(self):
-        greatest_common_divisor = gcd(self._numerator, self._denominator)
-        return self._numerator // greatest_common_divisor, self._denominator // greatest_common_divisor
 
     def __add__(self, other):
         """
