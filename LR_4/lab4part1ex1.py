@@ -48,6 +48,8 @@ class Rational:
         """
         fraction_a + fraction_b
         """
+        if not isinstance(other, Rational):
+            return NotImplemented
         return Rational(self._numerator * other.denominator + self._denominator * self._numerator,
                         self._denominator * other.denominator)
 
@@ -55,6 +57,8 @@ class Rational:
         """
         fraction_a += fraction_b
         """
+        if not isinstance(other, Rational):
+            return NotImplemented
         return Rational(self._numerator * other.denominator + self._denominator * self._numerator,
                         self._denominator * other.denominator)
 
@@ -62,6 +66,8 @@ class Rational:
         """
         fraction_a - fraction_b
         """
+        if not isinstance(other, Rational):
+            return NotImplemented
         return Rational(self._numerator * other.denominator - self._denominator * other.numerator,
                         self._denominator * other.denominator)
 
@@ -69,6 +75,8 @@ class Rational:
         """
         fraction_a -= fraction_b
         """
+        if not isinstance(other, Rational):
+            return NotImplemented
         return Rational(self._numerator * other.denominator - self._denominator * other.numerator,
                         self._denominator * other.denominator)
 
@@ -76,24 +84,32 @@ class Rational:
         """
         fraction_a * fraction_b
         """
+        if not isinstance(other, Rational):
+            return NotImplemented
         return Rational(self._numerator * other.numerator, self._denominator * other.denominator)
 
     def __imul__(self, other):
         """
         fraction_a *= fraction_b
         """
+        if not isinstance(other, Rational):
+            return NotImplemented
         return Rational(self._numerator * other.numerator, self._denominator * other.denominator)
 
     def __truediv__(self, other):
         """
         fraction_a / fraction_b
         """
+        if not isinstance(other, Rational):
+            return NotImplemented
         return Rational(self._numerator * other.denominator, other.numerator * self._denominator)
 
     def __itruediv__(self, other):
         """
         fraction_a /= fraction_b
         """
+        if not isinstance(other, Rational):
+            return NotImplemented
         return Rational(self._numerator * other.denominator, other.numerator * self._denominator)
 
     def __eq__(self, other):
@@ -101,7 +117,7 @@ class Rational:
         fraction_a == fraction_b
         """
         if not isinstance(other, Rational):
-            raise TypeError('Incorrect type!')
+            return NotImplemented
         return self._numerator / self._denominator == other.numerator / other.denominator
 
     def __le__(self, other):
@@ -109,7 +125,8 @@ class Rational:
         fraction_a <= fraction_b
         """
         if not isinstance(other, Rational):
-            raise TypeError('Incorrect type!')
+            return NotImplemented
+            # raise TypeError('Incorrect type!')
         return self._numerator / self._denominator <= other.numerator / other.denominator
 
     def __lt__(self, other):
@@ -117,7 +134,7 @@ class Rational:
         fraction_a < fraction_b
         """
         if not isinstance(other, Rational):
-            raise TypeError('Incorrect type!')
+            return NotImplemented
         return self._numerator / self._denominator < other.numerator / other.denominator
 
     def __ge__(self, other):
@@ -125,7 +142,7 @@ class Rational:
         fraction_a >= fraction_b
         """
         if not isinstance(other, Rational):
-            raise TypeError('Incorrect type!')
+            return NotImplemented
         return self._numerator / self._denominator >= other.numerator / other.denominator
 
     def __gt__(self, other):
@@ -133,7 +150,7 @@ class Rational:
         fraction_a > fraction_b
         """
         if not isinstance(other, Rational):
-            raise TypeError('Incorrect type!')
+            return NotImplemented
         return self._numerator / self._denominator > other.numerator / other.denominator
 
     def __ne__(self, other):
@@ -141,7 +158,7 @@ class Rational:
         fraction_a != fraction_b
         """
         if not isinstance(other, Rational):
-            raise TypeError('Incorrect type!')
+            return NotImplemented
         return self._numerator / self._denominator != other.numerator / other.denominator
 
     def __str__(self):

@@ -72,7 +72,8 @@ class Calendar:
         number_a += number_b
         """
         if not isinstance(other, Calendar):
-            raise TypeError('Incorrect type!')
+            return NotImplemented
+            # raise TypeError('Incorrect type!')
         _year = self._year + other._year
         _month = self._month + other._month
         _day = self._day + other._day
@@ -80,6 +81,9 @@ class Calendar:
         if _day > EACH_MONTH[self._month]:
             _day %= EACH_MONTH[self._month]
             _month += 1
+            # _day -= EACH_MONTH[self._month] > 0
+            # if self._year % 4 == 0 and (self._year % 400 == 0 or self._year % 100 != 0):
+            #    _month += 2
         if _month > 12:
             _month %= 12
             _year += 1
@@ -90,7 +94,7 @@ class Calendar:
         number_a -= number_b
         """
         if not isinstance(other, Calendar):
-            raise TypeError('Incorrect type!')
+            return NotImplemented
         _year = self._year - other._year
         _month = self._month - other._month
         _day = self._day - other._day
@@ -108,7 +112,7 @@ class Calendar:
         """
 
         if not isinstance(other, Calendar):
-            raise TypeError('Incorrect type!')
+            return NotImplemented
         return self.date == other.date
 
     def __ne__(self, other):
@@ -116,7 +120,7 @@ class Calendar:
         number_a != number_b
         """
         if not isinstance(other, Calendar):
-            raise TypeError('Incorrect type!')
+            return NotImplemented
         return self.date != other.date
 
     def __lt__(self, other):
@@ -124,7 +128,7 @@ class Calendar:
         number_a < number_b
         """
         if not isinstance(other, Calendar):
-            raise TypeError('Incorrect type!')
+            return NotImplemented
         return self.date < other.date
 
     def __le__(self, other):
@@ -132,13 +136,13 @@ class Calendar:
         number_a <= number_b
         """
         if not isinstance(other, Calendar):
-            raise TypeError('Incorrect type!')
+            return NotImplemented
         return self.date <= other.date
 
     def __gt__(self, other):
         """number_a > number_b """
         if not isinstance(other, Calendar):
-            raise TypeError('Incorrect type!')
+            return NotImplemented
         return self.date > other.date
 
     def __ge__(self, other):
@@ -146,7 +150,7 @@ class Calendar:
         number_a >= number_b
         """
         if not isinstance(other, Calendar):
-            raise TypeError('Incorrect type!')
+            return NotImplemented
         return self.date >= other.date
 
     def __str__(self):
