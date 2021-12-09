@@ -20,7 +20,7 @@ class BaseRandomPizza:
          it has three methods to add or show ingredients and to form the customer's order."""
 
     def __init__(self):
-        day = str(randint(0, 6))
+        # day = str(randint(0, 6))
         with open(PIZZA_FILE, "r") as f:
             data = load(f)
             self.ingredients = data[day]['ingredients']
@@ -87,8 +87,8 @@ class PizzaOfTheDay(BaseRandomPizza):
 
     def __init__(self):
         super().__init__()
-        with open(PIZZA_FILE, "r") as f:
-            self.day = str(date.today().weekday())
+        self.day = str(date.today().weekday())
+        # with open(PIZZA_FILE, "r") as f:
             # data = load(f)
             # self.day = list(data)[date.today().weekday()]
 

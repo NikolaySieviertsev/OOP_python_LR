@@ -1,11 +1,12 @@
 {
     "ingredients": [
         "Sauce",
-        "Tomato",
-        "Olives",
-        "Corn"
+        "Cheese",
+        "Mushrooms",
+        "Corn",
+        "Chicken"
     ],
-    "name": "Vegan Edition",
-    "day": "Wednesday",
-    "date": "2021-11-24"
+    "name": "Forest Pleasure",
+    "day": "Friday",
+    "date": "2021-11-26"
 }
