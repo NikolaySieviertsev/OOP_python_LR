@@ -1,0 +1,32 @@
+[
+    {
+        "name": "OOP Python",
+        "type": "local",
+        "program": [
+            "base of oop",
+            "notation",
+            "syntax"
+        ],
+        "teacher": "Max"
+    },
+    {
+        "name": "Start programming with C",
+        "type": "offsite",
+        "program": [
+            "starter pack",
+            "OOP"
+        ],
+        "teacher": "Dima"
+    },
+    {
+        "name": "Better Code Python",
+        "type": "offsite",
+        "program": [
+            "1st step",
+            "2nd step",
+            "3rd step",
+            "finish"
+        ],
+        "teacher": "Vladislav Volodymirovich"
+    }
+]

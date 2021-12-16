@@ -1,0 +1,15 @@
+[
+    {
+        "name": "Vladislav Volodymirovich",
+        "courses": [
+            "Java",
+            "Better Code Python"
+        ]
+    },
+    {
+        "name": "Dima",
+        "courses": [
+            "Start programming with C"
+        ]
+    }
+]
